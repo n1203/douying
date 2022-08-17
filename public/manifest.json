@@ -1,0 +1,45 @@
+{
+  "name": "DouYin",
+  "version": "1.0.2",
+  "description": "中文 Notion 插件，社区人工翻译校验。插件封装由 Notion.Pet 提供。",
+  "keywords": "notion汉化,中文版notion,notion中文,notion",
+  "manifest_version": 2,
+  "externally_connectable": {
+    "matches": ["*://compass.jinritemai.com/*"]
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "./assets/icon16.png",
+      "48": "./assets/icon48.png",
+      "128": "./assets/icon128.png"
+    },
+    "default_title": "Popup",
+    "default_popup": "index.html"
+  },
+  "permissions": [
+    "https://*/*",
+    "storage",
+    "webRequest",
+    "tabs",
+    "notifications",
+    "webRequestBlocking",
+    "contextMenus"
+  ],
+  "homepage_url": "https://www.baidu.com",
+  "web_accessible_resources": ["inject.js"],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://compass.jinritemai.com/*"
+      ],
+      "js": [
+        "inject.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "host_permissions": [
+    "https://*/"
+  ]
+}

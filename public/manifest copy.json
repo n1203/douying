@@ -1,0 +1,32 @@
+{
+  "name": "NotionCn",
+  "version": "1.0.0",
+  "description": "中文 Notion 插件，社区人工翻译校验。插件封装由 Notion.Pet 提供。",
+  "manifest_version": 3,
+  "action": {
+    "default_icon": {
+      "16": "./assets/icon16.png",
+      "48": "./assets/icon48.png",
+      "128": "./assets/icon128.png"
+    }
+  },
+  "permissions": [],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://notion.so/*",
+        "http://www.notion.so/*",
+        "https://notion.so/*",
+        "https://www.notion.so/*"
+      ],
+      "js": [
+        "contentScript.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "host_permissions": [
+    "https://*/"
+  ]
+}
