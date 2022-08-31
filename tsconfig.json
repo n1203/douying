@@ -23,6 +23,6 @@
       "@/*": ["src/*"],
     }
   },
-  "include": ["src", "background/background.ts", "contentScript/contentScript.tsts", "common/styles"],
+  "include": ["src", "background/background.ts", "contentScript/contentScript.ts", "common/styles", "devtool"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

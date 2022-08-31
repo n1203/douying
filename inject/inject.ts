@@ -99,15 +99,16 @@ function getData2() {
 }
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-  switch (request.type) {
-    case 'CMM':
-      sendResponse(getCMMData());
-      break;
-    case 'CMM2':
-      sendResponse(getCMMDataWord());
-      break;
-    default:
-      sendResponse(getData2());
-      break;
-  }
+  // console.log('%cMyProject%cline:101%crequest', 'color:#fff;background:#ee6f57;padding:3px;border-radius:2px', 'color:#fff;background:#1f3c88;padding:3px;border-radius:2px', 'color:#fff;background:rgb(229, 187, 129);padding:3px;border-radius:2px', request)
+  // switch (request.type) {
+  //   case 'CMM':
+  //     sendResponse(getCMMData());
+  //     break;
+  //   case 'CMM2':
+  //     sendResponse(getCMMDataWord());
+  //     break;
+  //   default:
+  //     sendResponse(getData2());
+  //     break;
+  // }
 });

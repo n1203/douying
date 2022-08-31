@@ -16,6 +16,10 @@
     "default_title": "Popup",
     "default_popup": "index.html"
   },
+	"devtools_page": "devtools/index.html",
+  "background": {
+    "service_worker": "background.js"
+  },
   "permissions": [
     "https://*/*",
     "storage",

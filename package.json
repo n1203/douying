@@ -26,7 +26,6 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-grid-layout": "^1.3.4",
-    "tdesign-react": "^0.40.2",
     "tiny-swiper": "^2.2.0"
   },
   "devDependencies": {

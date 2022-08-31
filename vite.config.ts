@@ -16,8 +16,9 @@ export default defineConfig({
     }
   },
   build: {
+    sourcemap: true,
     rollupOptions: {
-      input: ["index.html", "contentScript/contentScript.ts", "inject/inject.ts", "src/main.tsx"],
+      input: ["index.html", "contentScript/contentScript.ts", "inject/inject.ts", "src/main.tsx",  "devtools/index.html", "devtools/networkrequests.js", 'background/background.ts'],
       output: {
         chunkFileNames: "[name].[hash].js",
         assetFileNames: "[name].[hash].[ext]",
