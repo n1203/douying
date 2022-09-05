@@ -20,6 +20,7 @@ export const useConfigStore = () => {
       setConfig(newConfig)
     },
     onStart: () => {
+      chrome.runtime.sendMessage({ type: "reload", data: {}})
       // setTimeout(() => {
       //   window.toastSuccess.remove()
       // }, 1500);

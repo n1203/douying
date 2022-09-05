@@ -23,7 +23,9 @@ export class DataManager {
     // 指标
     if (url.includes('dashboard_v2')) {
       this.DashBoardDataSet(JSON.parse(content).data)
+      window.location.reload()
     }
+
   }
 
   DashBoardDataSet(data: any) {
@@ -43,6 +45,9 @@ export class DataManager {
         })
     })
 
+    result[1].push('数据记录时间')
+    result[2].push(new Date().toLocaleString())
+
     if (localData?.data?.length) {
       localStorage.setItem(localDataKey, JSON.stringify({data: [
         ...localData.data,
@@ -51,5 +56,9 @@ export class DataManager {
     } else {
       localStorage.setItem(localDataKey, JSON.stringify({data: result}))
     }
+  }
+
+  clear() {
+    localStorage.setItem('DashBoardData', JSON.stringify({data: []}))
   }
 }

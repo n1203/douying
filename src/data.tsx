@@ -1,71 +1,53 @@
 import { useDataStore } from "./hooks/useDataStore";
+import * as dataManager from './data'
 
 export const Data = () => {
   const dataStore = useDataStore()
-  console.log('%cMyProject%cline:4%cdataStore', 'color:#fff;background:#ee6f57;padding:3px;border-radius:2px', 'color:#fff;background:#1f3c88;padding:3px;border-radius:2px', 'color:#fff;background:rgb(118, 77, 57);padding:3px;border-radius:2px', dataStore)
+
+  const ExportCSV = () => {
+    const blob = new Blob([dataStore.data.slice(1, 999999).map((o: any) => o.join(',')).join(`
+`)], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.setAttribute("href", url);
+    link.setAttribute("download", `巨量百应-${new Date().toLocaleDateString()}.csv`);
+    link.click();
+  };
+
   return (
-    <div className="overflow-x-auto relative">
+    <div className="relative w-full overflow-x-scroll overflow-hidden">
       <p className="font-black text-gray-900 dark:text-white p-2 border-t bg-gray-100 border-b">当前抓取数据</p>
-      <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+      <table className="text-sm text-left text-gray-500 dark:text-gray-400 max-w-max">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
-            <th scope="col" className="py-3 px-6">
-              Product name
+            {dataStore.data[1].map(th => {
+              return <th scope="col" className="py-3 px-6 whitespace-nowrap">
+              {th}
             </th>
-            <th scope="col" className="py-3 px-6">
-              Color
-            </th>
-            <th scope="col" className="py-3 px-6">
-              Category
-            </th>
-            <th scope="col" className="py-3 px-6">
-              Price
-            </th>
+            })}
           </tr>
         </thead>
         <tbody>
-          <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-            <th
-              scope="row"
-              className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              Apple MacBook Pro 17"
-            </th>
-            <td className="py-4 px-6">Sliver</td>
-            <td className="py-4 px-6">Laptop</td>
-            <td className="py-4 px-6">$2999</td>
-          </tr>
-          <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-            <th
-              scope="row"
-              className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              Microsoft Surface Pro
-            </th>
-            <td className="py-4 px-6">White</td>
-            <td className="py-4 px-6">Laptop PC</td>
-            <td className="py-4 px-6">$1999</td>
-          </tr>
-          <tr className="bg-white dark:bg-gray-800">
-            <th
-              scope="row"
-              className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              Magic Mouse 2
-            </th>
-            <td className="py-4 px-6">Black</td>
-            <td className="py-4 px-6">Accessories</td>
-            <td className="py-4 px-6">$99</td>
-          </tr>
+          {dataStore.data.slice(2, 999999).map((row: any) => {
+            return <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              {row.map((td: any) => {
+                return <td className="py-4 px-6  whitespace-nowrap">{td}</td>
+              })}
+            </tr>
+          })}
         </tbody>
       </table>
 
-      <div className="p-2 w-full">
-        <button type="button" className="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">清空当前抓取数据</button>
+      <div className="p-2 w-full fixed bottom-4 left-4">
+        <button onClick={() => {
+          dataManager.Data.clear()
+          window.location.reload()
+        }} type="button" className="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">清空当前抓取数据({dataStore.data.length-2}条)</button>
 
         <button
             type="button"
             className="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+            onClick={ExportCSV}
           >
           导出数据到Excel
         </button>

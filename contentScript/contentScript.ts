@@ -59,5 +59,11 @@ console.log(1);
 
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  console.log('%cMyProject%cline:60%crequest', 'color:#fff;background:#ee6f57;padding:3px;border-radius:2px', 'color:#fff;background:#1f3c88;padding:3px;border-radius:2px', 'color:#fff;background:rgb(17, 63, 61);padding:3px;border-radius:2px', request)
+  switch (request.type) {
+    case 'reload':
+      window.location.reload()
+      break;
+    default:
+      break;
+  }
 })
